@@ -7,16 +7,13 @@ import Income from "./income/Income";
 export default function ExpanseBord() {
   const [formData, setFormData] = useState([]);
   // filter out data for income and expense component
-
   const onlyIncomeEntrys = formData.filter((entry) => {
     return entry.typeOfAmmount == "Income";
   });
   const onlyExpenseEntrys = formData.filter((entry) => {
     return entry.typeOfAmmount == "Expense";
   });
-  console.log(formData);
-  console.log(onlyIncomeEntrys, "income");
-  console.log(onlyExpenseEntrys, "expense");
+ ;
 
   return (
     <main className="relative mx-auto mt-10 w-full max-w-7xl">

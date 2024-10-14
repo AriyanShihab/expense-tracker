@@ -7,6 +7,7 @@ export default function Form({ formData, setFormData }) {
     amount: 10,
     date: "",
     typeOfAmmount: type,
+    id: crypto.randomUUID(),
   });
 
   const categories = {
@@ -39,12 +40,13 @@ export default function Form({ formData, setFormData }) {
 
     setFormData([...formData, tempFormData]);
 
-    // Optionally, reset tempFormData after submission if needed
+    //  reset tempFormData after submission
     setTempFormData({
       category: "",
       amount: 10,
       date: "",
       typeOfAmmount: type,
+      id: "",
     });
   }
 
@@ -61,7 +63,7 @@ export default function Form({ formData, setFormData }) {
               setType("Expense");
               setTempFormData((prevData) => ({
                 ...prevData,
-                category: "", // Reset category to force selection
+                category: "", // Reset category
                 typeOfAmmount: "Expense", // Update typeOfAmmount
               }));
             }}
@@ -76,7 +78,7 @@ export default function Form({ formData, setFormData }) {
               setType("Income");
               setTempFormData((prevData) => ({
                 ...prevData,
-                category: "", // Reset category to force selection
+                category: "", // Reset category
                 typeOfAmmount: "Income", // Update typeOfAmmount
               }));
             }}

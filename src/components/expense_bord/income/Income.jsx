@@ -1,14 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import IncomeTitleIcon from "./IncomeTitleIcon";
-import ShortIcon from "../../../global-icons/ShortIcon";
-import FilterIcon from "../../../global-icons/FilterIcon";
-import EditIcon from "../../../global-icons/EditIcon";
-import DeleteIcon from "../../../global-icons/DeleteIcon";
 import IncomeRow from "./IncomeRow";
 import IncomeFilter from "./IncomeFilter";
 import IncomeShorting from "./IncomeShorting";
 
-export default function Income() {
+export default function Income({ entrys }) {
+  const data = [...entrys];
+
   return (
     <div className="border rounded-md relative">
       <div className="flex items-center justify-between gap-2 bg-[#F9FAFB] py-4 px-4 rounded-md">
@@ -31,7 +29,9 @@ export default function Income() {
         </div>
       </div>
       <div className="p-4 divide-y">
-        <IncomeRow />
+        {data.map((entry) => (
+          <IncomeRow key={entry.id} data={entry} />
+        ))}
       </div>
     </div>
   );

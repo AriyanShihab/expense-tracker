@@ -2,18 +2,20 @@ import React from "react";
 import EditIcon from "../../../global-icons/EditIcon";
 import DeleteIcon from "../../../global-icons/DeleteIcon";
 
-export default function IncomeRow() {
+export default function IncomeRow({ data }) {
+  console.log(data, "from dataRow");
+  const { category, amount, date } = data;
   return (
     <div className="flex justify-between items-center py-2 relative group cursor-pointer">
       <div>
         <h3 className="text-base font-medium leading-7 text-gray-600">
-          Salary
+          {category}
         </h3>
-        <p className="text-xs text-gray-600">15 January 2024</p>
+        <p className="text-xs text-gray-600">{date}</p>
       </div>
       <div className="flex items-center gap-2">
         <p className="text-base font-semibold text-gray-600 transition-all group-hover:-translate-x-14">
-          BDT 10000
+          BDT {amount}
         </p>
 
         <div className="translate-x-5 group-hover:translate-x-0 opacity-0 group-hover:opacity-100 absolute right-0 top-1/2 -translate-y-1/2 transition-all">
