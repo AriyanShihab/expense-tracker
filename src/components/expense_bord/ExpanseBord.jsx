@@ -11,14 +11,12 @@ export default function ExpanseBord() {
         <Form />
         {/* Right Column */}
         <div className="lg:col-span-2">
-          
           <BalanceSummery />
 
           {/* List Down */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-8">
-            <Expense />
-
             <Income />
+            <Expense />
           </div>
         </div>
       </section>

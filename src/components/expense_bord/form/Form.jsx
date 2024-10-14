@@ -19,7 +19,7 @@ export default function Form() {
 
         <div className="mt-3">
           <label
-            htmlfor="category"
+            htmlFor="category"
             className="block text-sm font-medium leading-6 text-gray-900"
           >
             Category
@@ -28,7 +28,7 @@ export default function Form() {
             <select
               id="category"
               name="category"
-              autocomplete="category-name"
+              autoComplete="category-name"
               className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6"
             >
               <option>Education</option>
@@ -45,7 +45,7 @@ export default function Form() {
 
         <div className="mt-3">
           <label
-            htmlfor="amount"
+            htmlFor="amount"
             className="block text-sm font-medium leading-6 text-gray-900"
           >
             Amount
@@ -55,7 +55,7 @@ export default function Form() {
               type="number"
               name="amount"
               id="amount"
-              autocomplete="off"
+              autoComplete="off"
               placeholder="12931"
               className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6"
             />
@@ -64,7 +64,7 @@ export default function Form() {
 
         <div className="mt-3">
           <label
-            htmlfor="date"
+            htmlFor="date"
             className="block text-sm font-medium leading-6 text-gray-900"
           >
             Date
@@ -74,7 +74,7 @@ export default function Form() {
               type="date"
               name="date"
               id="date"
-              autocomplete="off"
+              autoComplete="off"
               placeholder="12931"
               className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6"
             />
