@@ -1,71 +1,32 @@
 import React, { useState } from "react";
 
-export default function Form({ formData, setFormData }) {
-  const [type, setType] = useState("Expense");
-  const [tempFormData, setTempFormData] = useState({
-    category: "", // Initially empty
-    amount: 10,
-    date: "",
-    typeOfAmmount: type,
-    id: crypto.randomUUID(),
-  });
-
-  const categories = {
-    Expense: [
-      "Education",
-      "Food",
-      "Health",
-      "Bill",
-      "Insurance",
-      "Tax",
-      "Transport",
-      "Telephone",
-    ],
-    Income: ["Salary", "Outsourcing", "Bond", "Dividend"],
-  };
-
-  function handleChange(e) {
-    let elementName = e.target.name;
-    let elementValue = e.target.value;
-    setTempFormData({ ...tempFormData, [elementName]: elementValue });
-  }
-
-  function handleSubmit(e) {
-    e.preventDefault();
-
-    // Automatically select the first category if none is selected
-    if (!tempFormData.category) {
-      tempFormData.category = categories[type][0]; // Set to the first category based on type
-    }
-
-    setFormData([...formData, tempFormData]);
-
-    //  reset tempFormData after submission
-    setTempFormData({
-      category: "",
-      amount: 10,
-      date: "",
-      typeOfAmmount: type,
-      id: "",
+export default function Form({
+  onSubmission,
+  type,
+  setType,
+  transaction,
+  setTransaction,
+}) {
+ 
+  const handleChange = (evt) => {
+    const name = evt.target.name;
+    const value = evt.target.value;
+    setTransaction({
+      ...transaction,
+      [name]: value,
     });
-  }
-
+  };
   return (
     <div className="p-6 py-8 bg-[#F9FAFB] border rounded-md">
       <h2 className="text-3xl font-semibold leading-7 text-gray-800 text-center">
         Expense Tracker
       </h2>
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={() => onSubmission(event, transaction)}>
         <div className="flex divide-x divide-slate-400/20 overflow-hidden rounded-md bg-white text-[0.8125rem] font-medium leading-5 text-slate-700 shadow-sm ring-1 ring-slate-700/10 mt-6">
           <div
             onClick={() => {
               setType("Expense");
-              setTempFormData((prevData) => ({
-                ...prevData,
-                category: "", // Reset category
-                typeOfAmmount: "Expense", // Update typeOfAmmount
-              }));
             }}
             className={`cursor-pointer text-center flex-1 px-4 py-2 hover:bg-slate-50 hover:text-slate-900 ${
               type === "Expense" ? "active" : ""
@@ -76,11 +37,6 @@ export default function Form({ formData, setFormData }) {
           <div
             onClick={() => {
               setType("Income");
-              setTempFormData((prevData) => ({
-                ...prevData,
-                category: "", // Reset category
-                typeOfAmmount: "Income", // Update typeOfAmmount
-              }));
             }}
             className={`cursor-pointer text-center flex-1 px-4 py-2 hover:bg-slate-50 hover:text-slate-900 ${
               type === "Income" ? "active" : ""
@@ -102,7 +58,7 @@ export default function Form({ formData, setFormData }) {
               id="category"
               name="category"
               required
-              value={tempFormData.category}
+              value={transaction.category}
               onChange={handleChange}
               autoComplete="category-name"
               className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6"
@@ -110,11 +66,24 @@ export default function Form({ formData, setFormData }) {
               <option value="" disabled>
                 Select a category
               </option>
-              {categories[type].map((category, index) => (
-                <option key={index} value={category}>
-                  {category}
-                </option>
-              ))}
+              {type === "Expense" ? (
+                <>
+                  <option>Education</option>
+                  <option>Food</option>
+                  <option>Health</option>
+                  <option>Bill</option>
+                  <option>Insurance</option>
+                  <option>Transport</option>
+                  <option>Telephone</option>
+                </>
+              ) : (
+                <>
+                  <option>Salary</option>
+                  <option>Outsourcing</option>
+                  <option>Bond</option>
+                  <option>Dividend</option>
+                </>
+              )}
             </select>
           </div>
         </div>
@@ -130,12 +99,11 @@ export default function Form({ formData, setFormData }) {
             <input
               type="number"
               name="amount"
-              value={tempFormData.amount}
-              onChange={handleChange}
               required
-              id="amount"
+              value={transaction.amount}
+              onChange={handleChange}
               autoComplete="off"
-              placeholder="12931"
+              placeholder="Enter Amount"
               className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6"
             />
           </div>
@@ -152,10 +120,9 @@ export default function Form({ formData, setFormData }) {
             <input
               type="date"
               name="date"
-              value={tempFormData.date}
-              onChange={handleChange}
               required
-              id="date"
+              value={transaction.date}
+              onChange={handleChange}
               autoComplete="off"
               className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6"
             />

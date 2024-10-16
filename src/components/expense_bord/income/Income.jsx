@@ -4,9 +4,7 @@ import IncomeRow from "./IncomeRow";
 import IncomeFilter from "./IncomeFilter";
 import IncomeShorting from "./IncomeShorting";
 
-export default function Income({ entrys }) {
-  const data = [...entrys];
-
+export default function Income({ entrys=[], sortingFunc }) {
   return (
     <div className="border rounded-md relative">
       <div className="flex items-center justify-between gap-2 bg-[#F9FAFB] py-4 px-4 rounded-md">
@@ -22,14 +20,13 @@ export default function Income({ entrys }) {
           </div>
         </div>
         <div>
-          {/* Sorting */}
-          <IncomeShorting />
-          {/* Filtering */}
+          <IncomeShorting sortingFunc={sortingFunc} />
+
           <IncomeFilter />
         </div>
       </div>
       <div className="p-4 divide-y">
-        {data.map((entry) => (
+        {entrys.map((entry) => (
           <IncomeRow key={entry.id} data={entry} />
         ))}
       </div>

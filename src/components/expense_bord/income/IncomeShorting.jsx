@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ShortIcon from "../../../global-icons/ShortIcon";
 
-export default function IncomeShorting() {
+export default function IncomeShorting({ sortingFunc }) {
   const [show, setShow] = useState(false);
   return (
     <div className="relative inline-block text-left">
@@ -27,6 +27,7 @@ export default function IncomeShorting() {
         >
           <div className="py-1" role="none">
             <a
+              onClick={() => sortingFunc("lowToHigh")}
               className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-all"
               role="menuitem"
               tabIndex={-1}
@@ -35,6 +36,7 @@ export default function IncomeShorting() {
               Low to High
             </a>
             <a
+              onClick={() => sortingFunc("highToLow")}
               className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-all"
               role="menuitem"
               tabIndex={-1}
