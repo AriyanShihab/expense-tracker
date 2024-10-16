@@ -13,9 +13,10 @@ export default function ExpanseBord() {
     amount: "",
     date: "",
   });
-
+  // handle form submission
   const handleEntrySubmission = (evnt, transaction) => {
     evnt.preventDefault();
+    // adding id for detecting the entry and also add the entry type, keep form componet simple and logic in the main component
     let modifyedTransaction = {
       ...transaction,
       id: Date.now(),
@@ -46,6 +47,35 @@ export default function ExpanseBord() {
     { income: 0, expense: 0, balance: 0 }
   );
 
+  const shortEntrys = (order, whereToPerform) => {
+    let oppsite = whereToPerform === "Income" ? "Expense" : "Income";
+    const sortedEntries = [...transactionEntry]
+      .filter((entry) => entry.transactionType === whereToPerform)
+      .sort((a, b) => {
+        const amountA = Number(a.amount);
+        const amountB = Number(b.amount);
+        return order === "asc" ? amountA - amountB : amountB - amountA;
+      });
+
+    // Update state to trigger re-render with sorted expense entries
+    setTransactionEntry((prevEntries) => {
+      // Combine sorted expenses with unmodified  entries
+      const oppositeEntries = prevEntries.filter(
+        (entry) => entry.transactionType === oppsite
+      );
+      return [...oppositeEntries, ...sortedEntries];
+    });
+  };
+
+  // calculate data for income expense  components
+
+  const incomeTransactions = transactionEntry.filter(
+    (entry) => entry.transactionType === "Income"
+  );
+  const expenseTransactions = transactionEntry.filter(
+    (entry) => entry.transactionType === "Expense"
+  );
+
   return (
     <main className="relative mx-auto mt-10 w-full max-w-7xl">
       <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -61,8 +91,11 @@ export default function ExpanseBord() {
           <BalanceSummery transactionData={dataForTransactionSummary} />
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-8">
-            <Income />
-            <Expense />
+            <Income incomeTransactions={incomeTransactions} />
+            <Expense
+              expenseTransactions={expenseTransactions}
+              shortEntrys={shortEntrys}
+            />
           </div>
         </div>
       </section>

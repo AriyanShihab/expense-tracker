@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ShortIcon from "../../../global-icons/ShortIcon";
 
-export default function ExpanseShorting() {
+export default function ExpanseShorting({ shortEntrys }) {
   const [show, setShow] = useState(false);
   return (
     <div className="relative inline-block text-left">
@@ -32,6 +32,7 @@ export default function ExpanseShorting() {
               role="menuitem"
               tabIndex={-1}
               id="menu-item-0"
+              onClick={()=>shortEntrys("asc", "Expense")}
             >
               Low to High
             </a>
@@ -41,6 +42,7 @@ export default function ExpanseShorting() {
               role="menuitem"
               tabIndex={-1}
               id="menu-item-0"
+              onClick={()=>shortEntrys("desc", "Expense")}
             >
               High to Low
             </a>

@@ -4,7 +4,7 @@ import IncomeRow from "./IncomeRow";
 import IncomeFilter from "./IncomeFilter";
 import IncomeShorting from "./IncomeShorting";
 
-export default function Income({ entrys=[], sortingFunc }) {
+export default function Income({ incomeTransactions=[] }) {
   return (
     <div className="border rounded-md relative">
       <div className="flex items-center justify-between gap-2 bg-[#F9FAFB] py-4 px-4 rounded-md">
@@ -20,13 +20,13 @@ export default function Income({ entrys=[], sortingFunc }) {
           </div>
         </div>
         <div>
-          <IncomeShorting sortingFunc={sortingFunc} />
+          <IncomeShorting/>
 
           <IncomeFilter />
         </div>
       </div>
       <div className="p-4 divide-y">
-        {entrys.map((entry) => (
+        {incomeTransactions.map((entry) => (
           <IncomeRow key={entry.id} data={entry} />
         ))}
       </div>

@@ -3,7 +3,7 @@ import EditIcon from "../../../global-icons/EditIcon";
 import DeleteIcon from "../../../global-icons/DeleteIcon";
 
 export default function IncomeRow({ data }) {
-  console.log(data, "from dataRow");
+  
   const { category, amount, date } = data;
   return (
     <div className="flex justify-between items-center py-2 relative group cursor-pointer">
