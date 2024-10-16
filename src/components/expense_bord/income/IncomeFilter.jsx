@@ -1,8 +1,14 @@
 import React, { useState } from "react";
 import FilterIcon from "../../../global-icons/FilterIcon";
 
-export default function IncomeFilter() {
+export default function IncomeFilter({ activeFilters, handleFilterChange }) {
   const [show, setShow] = useState(false);
+  function handleChackBoxChange(event) {
+    const name = event.target.name;
+    const isChecked = event.target.checked;
+    handleFilterChange(name, isChecked)
+  }
+
   return (
     <div className="relative inline-block text-left">
       <div>
@@ -31,7 +37,9 @@ export default function IncomeFilter() {
               <input
                 type="checkbox"
                 className="form-checkbox h-4 w-4 rounded-md text-gray-600"
-                id="filter-option-1"
+                name={"Salary"}
+                checked={activeFilters.Salary}
+                onChange={handleChackBoxChange}
               />
               <span className="ml-2">Salary</span>
             </label>
@@ -39,7 +47,9 @@ export default function IncomeFilter() {
               <input
                 type="checkbox"
                 className="form-checkbox h-4 w-4 rounded-md text-gray-600"
-                id="filter-option-2"
+                name={"Outsourcing"}
+                checked={activeFilters.Outsourcing}
+                onChange={handleChackBoxChange}
               />
               <span className="ml-2">Outsourcing</span>
             </label>
@@ -48,6 +58,9 @@ export default function IncomeFilter() {
                 type="checkbox"
                 className="form-checkbox h-4 w-4 rounded-md text-gray-600"
                 id="filter-option-3"
+                name={"Bond"}
+                checked={activeFilters.Bond}
+                onChange={handleChackBoxChange}
               />
               <span className="ml-2">Bond</span>
             </label>
@@ -56,8 +69,11 @@ export default function IncomeFilter() {
                 type="checkbox"
                 className="form-checkbox h-4 w-4 rounded-md text-gray-600"
                 id="filter-option-3"
+                name={"Dividend"}
+                checked={activeFilters.Dividend}
+                onChange={handleChackBoxChange}
               />
-              <span className="ml-2">Dividend</span>
+              Dividend
             </label>
           </div>
         </div>

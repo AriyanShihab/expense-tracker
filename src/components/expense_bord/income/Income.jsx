@@ -4,7 +4,37 @@ import IncomeRow from "./IncomeRow";
 import IncomeFilter from "./IncomeFilter";
 import IncomeShorting from "./IncomeShorting";
 
-export default function Income({ incomeTransactions=[] }) {
+export default function Income({ incomeTransactions, shortEntrys }) {
+  // catrgory of income for filterring income entry..
+
+  const [activeFilters, setActiveFilters] = useState({
+    Salary: false,
+    Outsourcing: false,
+    Bond: false,
+    Dividend: false,
+  });
+
+  // funtion for handeling filter change
+
+  const handleFilterChange = (filterName, isChecked) => {
+    setActiveFilters((prevFilters) => ({
+      ...prevFilters,
+      [filterName]: isChecked,
+    }));
+  };
+
+  const filteredEntry = incomeTransactions.filter((entry) => {
+    const isFilterApplyed = Object.keys(activeFilters).some(
+      (key) => activeFilters[key] === true
+    );
+    if (isFilterApplyed) {
+      return Object.keys(activeFilters).some(
+        (category) => activeFilters[category] && entry.category === category
+      );
+    } else return incomeTransactions;
+  });
+  console.log(filteredEntry);
+
   return (
     <div className="border rounded-md relative">
       <div className="flex items-center justify-between gap-2 bg-[#F9FAFB] py-4 px-4 rounded-md">
@@ -20,13 +50,16 @@ export default function Income({ incomeTransactions=[] }) {
           </div>
         </div>
         <div>
-          <IncomeShorting/>
+          <IncomeShorting shortEntrys={shortEntrys} />
 
-          <IncomeFilter />
+          <IncomeFilter
+            activeFilters={activeFilters}
+            handleFilterChange={handleFilterChange}
+          />
         </div>
       </div>
       <div className="p-4 divide-y">
-        {incomeTransactions.map((entry) => (
+        {filteredEntry.map((entry) => (
           <IncomeRow key={entry.id} data={entry} />
         ))}
       </div>

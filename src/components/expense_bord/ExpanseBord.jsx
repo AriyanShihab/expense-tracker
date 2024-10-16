@@ -57,9 +57,9 @@ export default function ExpanseBord() {
         return order === "asc" ? amountA - amountB : amountB - amountA;
       });
 
-    // Update state to trigger re-render with sorted expense entries
+    // Update state  with sorted expense entries
     setTransactionEntry((prevEntries) => {
-      // Combine sorted expenses with unmodified  entries
+      // Combine sorted entries with unmodified  entries
       const oppositeEntries = prevEntries.filter(
         (entry) => entry.transactionType === oppsite
       );
@@ -91,7 +91,7 @@ export default function ExpanseBord() {
           <BalanceSummery transactionData={dataForTransactionSummary} />
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-8">
-            <Income incomeTransactions={incomeTransactions} />
+            <Income incomeTransactions={incomeTransactions} shortEntrys={shortEntrys}/>
             <Expense
               expenseTransactions={expenseTransactions}
               shortEntrys={shortEntrys}
