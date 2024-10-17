@@ -3,6 +3,10 @@ import ShortIcon from "../../../global-icons/ShortIcon";
 
 export default function ExpanseShorting({ shortEntrys }) {
   const [show, setShow] = useState(false);
+  function handleSortAndCloaseSortPopup(order, whereToPerform) {
+    shortEntrys(order, whereToPerform);
+    setShow(false);
+  }
   return (
     <div className="relative inline-block text-left">
       <div>
@@ -27,22 +31,20 @@ export default function ExpanseShorting({ shortEntrys }) {
         >
           <div className="py-1" role="none">
             <span
-              href="#"
-              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-all"
+              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-all cursor-pointer"
               role="menuitem"
               tabIndex={-1}
               id="menu-item-0"
-              onClick={()=>shortEntrys("asc", "Expense")}
+              onClick={() => handleSortAndCloaseSortPopup("asc", "Expense")}
             >
               Low to High
             </span>
             <span
-              href="#"
-              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-all"
+              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-all cursor-pointer"
               role="menuitem"
               tabIndex={-1}
               id="menu-item-0"
-              onClick={()=>shortEntrys("desc", "Expense")}
+              onClick={() => handleSortAndCloaseSortPopup("desc", "Expense")}
             >
               High to Low
             </span>

@@ -33,10 +33,7 @@ export default function ExpanseFilter({ activeFilters, handleFilterChange }) {
           tabIndex={-1}
           id="filter-dropdown2"
         >
-          {/* Bill: false,
-    Insurance: false,
-    Transport: false,
-    Telephone: false, */}
+          
           <div className="py-1" role="none">
             <label className="inline-flex items-center px-4 py-2 text-sm text-gray-700">
               <input

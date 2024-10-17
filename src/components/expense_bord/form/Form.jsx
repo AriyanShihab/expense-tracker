@@ -75,7 +75,7 @@ export default function Form({
                 <>
                   <option>Education</option>
                   <option>Food</option>
-                  <option>Health</option>
+                  <option>Helth</option>
                   <option>Bill</option>
                   <option>Insurance</option>
                   <option>Transport</option>

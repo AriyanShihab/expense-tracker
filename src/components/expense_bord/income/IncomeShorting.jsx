@@ -3,6 +3,10 @@ import ShortIcon from "../../../global-icons/ShortIcon";
 
 export default function IncomeShorting({ shortEntrys }) {
   const [show, setShow] = useState(false);
+  function handleSortAndCloaseSortPopup(order, whereToPerform) {
+    shortEntrys(order, whereToPerform);
+    setShow(false);
+  }
   return (
     <div className="relative inline-block text-left">
       <div>
@@ -27,8 +31,8 @@ export default function IncomeShorting({ shortEntrys }) {
         >
           <div className="py-1" role="none">
             <span
-              onClick={() =>shortEntrys("asc", "Income")}
-              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-all"
+              onClick={() =>handleSortAndCloaseSortPopup("asc", "Income")}
+              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-all cursor-pointer"
               role="menuitem"
               tabIndex={-1}
               id="menu-item-0"
@@ -37,8 +41,8 @@ export default function IncomeShorting({ shortEntrys }) {
               Low to High
             </span>
             <span
-              onClick={() =>shortEntrys("desc", "Income")}
-              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-all"
+              onClick={() =>handleSortAndCloaseSortPopup("desc", "Income")}
+              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-all cursor-pointer"
               role="menuitem"
               tabIndex={-1}
               id="menu-item-0"
