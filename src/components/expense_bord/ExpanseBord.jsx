@@ -65,7 +65,7 @@ export default function ExpanseBord() {
     },
     { income: 0, expense: 0, balance: 0 }
   );
-
+// sort the entrys, where to perform tells wich type entry to be sorted, ensure when we sor expense data, it's not sort income data. and vice verca..
   const shortEntrys = (order, whereToPerform) => {
     let oppsite = whereToPerform === "Income" ? "Expense" : "Income";
     const sortedEntries = [...transactionEntry]
@@ -92,6 +92,8 @@ export default function ExpanseBord() {
     setType(entry.transactionType);
     setTypeOfFormAction({ type: "Edit", entryToBeUpdated: entry });
   };
+
+  // function fro deleting entry
   const handleDeletationOfEntry = (entry) => {
     const permission = window.confirm(
       `are you sure? this will delete the ${entry.transactionType} entry you have made on ${entry.date} `
