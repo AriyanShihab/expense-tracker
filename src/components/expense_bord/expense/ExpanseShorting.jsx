@@ -26,7 +26,7 @@ export default function ExpanseShorting({ shortEntrys }) {
           tabIndex={-1}
         >
           <div className="py-1" role="none">
-            <a
+            <span
               href="#"
               className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-all"
               role="menuitem"
@@ -35,8 +35,8 @@ export default function ExpanseShorting({ shortEntrys }) {
               onClick={()=>shortEntrys("asc", "Expense")}
             >
               Low to High
-            </a>
-            <a
+            </span>
+            <span
               href="#"
               className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-all"
               role="menuitem"
@@ -45,7 +45,7 @@ export default function ExpanseShorting({ shortEntrys }) {
               onClick={()=>shortEntrys("desc", "Expense")}
             >
               High to Low
-            </a>
+            </span>
           </div>
         </div>
       ) : null}

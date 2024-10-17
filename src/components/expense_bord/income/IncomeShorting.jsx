@@ -26,7 +26,7 @@ export default function IncomeShorting({ shortEntrys }) {
           tabIndex={-1}
         >
           <div className="py-1" role="none">
-            <a
+            <span
               onClick={() =>shortEntrys("asc", "Income")}
               className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-all"
               role="menuitem"
@@ -35,8 +35,8 @@ export default function IncomeShorting({ shortEntrys }) {
              
             >
               Low to High
-            </a>
-            <a
+            </span>
+            <span
               onClick={() =>shortEntrys("desc", "Income")}
               className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-all"
               role="menuitem"
@@ -44,7 +44,7 @@ export default function IncomeShorting({ shortEntrys }) {
               id="menu-item-0"
             >
               High to Low
-            </a>
+            </span>
           </div>
         </div>
       ) : null}

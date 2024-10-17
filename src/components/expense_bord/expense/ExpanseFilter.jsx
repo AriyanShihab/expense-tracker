@@ -1,8 +1,13 @@
 import React, { useState } from "react";
 import FilterIcon from "../../../global-icons/FilterIcon";
 
-export default function ExpanseFilter() {
+export default function ExpanseFilter({ activeFilters, handleFilterChange }) {
   const [show, setShow] = useState(false);
+  function handleChackBoxChange(event) {
+    const name = event.target.name;
+    const isChecked = event.target.checked;
+    handleFilterChange(name, isChecked)
+  }
 
   return (
     <div className="relative inline-block text-left">
@@ -28,12 +33,19 @@ export default function ExpanseFilter() {
           tabIndex={-1}
           id="filter-dropdown2"
         >
+          {/* Bill: false,
+    Insurance: false,
+    Transport: false,
+    Telephone: false, */}
           <div className="py-1" role="none">
             <label className="inline-flex items-center px-4 py-2 text-sm text-gray-700">
               <input
                 type="checkbox"
                 className="form-checkbox h-4 w-4 rounded-md text-gray-600"
                 id="filter-option-1"
+                name={"Education"}
+                checked={activeFilters.Education}
+                onChange={handleChackBoxChange}
               />
               <span className="ml-2">Education</span>
             </label>
@@ -42,6 +54,9 @@ export default function ExpanseFilter() {
                 type="checkbox"
                 className="form-checkbox h-4 w-4 rounded-md text-gray-600"
                 id="filter-option-2"
+                name={"Food"}
+                checked={activeFilters.Food}
+                onChange={handleChackBoxChange}
               />
               <span className="ml-2">Food</span>
             </label>
@@ -50,8 +65,56 @@ export default function ExpanseFilter() {
                 type="checkbox"
                 className="form-checkbox h-4 w-4 rounded-md text-gray-600"
                 id="filter-option-3"
+                name={"Helth"}
+                checked={activeFilters.Helth}
+                onChange={handleChackBoxChange}
               />
-              <span className="ml-2">Health</span>
+              <span className="ml-2">Helth</span>
+            </label>
+            <label className="inline-flex items-center px-4 py-2 text-sm text-gray-700">
+              <input
+                type="checkbox"
+                className="form-checkbox h-4 w-4 rounded-md text-gray-600"
+                id="filter-option-3"
+                name={"Bill"}
+                checked={activeFilters.Bill}
+                onChange={handleChackBoxChange}
+              />
+              <span className="ml-2">Bill</span>
+            </label>
+            <label className="inline-flex items-center px-4 py-2 text-sm text-gray-700">
+              <input
+                type="checkbox"
+                className="form-checkbox h-4 w-4 rounded-md text-gray-600"
+                id="filter-option-3"
+                name={"Transport"}
+                checked={activeFilters.Transport}
+                onChange={handleChackBoxChange}
+              />
+              <span className="ml-2">Transport</span>
+            </label>
+            
+            <label className="inline-flex items-center px-4 py-2 text-sm text-gray-700">
+              <input
+                type="checkbox"
+                className="form-checkbox h-4 w-4 rounded-md text-gray-600"
+                id="filter-option-3"
+                name={"Insurance"}
+                checked={activeFilters.Insurance}
+                onChange={handleChackBoxChange}
+              />
+              <span className="ml-2">Insurance</span>
+            </label>
+            <label className="inline-flex items-center px-4 py-2 text-sm text-gray-700">
+              <input
+                type="checkbox"
+                className="form-checkbox h-4 w-4 rounded-md text-gray-600"
+                id="filter-option-3"
+                name={"Telephone"}
+                checked={activeFilters.Telephone}
+                onChange={handleChackBoxChange}
+              />
+              <span className="ml-2">Telephone</span>
             </label>
           </div>
         </div>

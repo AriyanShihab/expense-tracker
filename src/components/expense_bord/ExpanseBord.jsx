@@ -7,22 +7,40 @@ import Income from "./income/Income";
 export default function ExpanseBord() {
   const [type, setType] = useState("Expense");
   const [transactionEntry, setTransactionEntry] = useState([]);
+  const [entryToBeUpdate, setEntryToBeUpdate] = useState(null);
+  const [typeOfFormAction, setTypeOfFormAction] = useState({});
 
-  const [transaction, setTransaction] = useState({
-    category: "",
-    amount: "",
-    date: "",
-  });
+  const [transaction, setTransaction] = useState(
+    entryToBeUpdate || {
+      category: "",
+      amount: "",
+      date: "",
+    }
+  );
+
   // handle form submission
-  const handleEntrySubmission = (evnt, transaction) => {
+  const handleEntrySubmission = (evnt, transaction, actionType) => {
     evnt.preventDefault();
     // adding id for detecting the entry and also add the entry type, keep form componet simple and logic in the main component
-    let modifyedTransaction = {
-      ...transaction,
-      id: Date.now(),
-      transactionType: type,
-    };
-    setTransactionEntry([...transactionEntry, modifyedTransaction]);
+    if (actionType !== "Edit") {
+      // if it's not edit, then its must be add...
+      let modifyedTransaction = {
+        ...transaction,
+        id: Date.now(),
+        transactionType: type,
+      };
+      setTransactionEntry([...transactionEntry, modifyedTransaction]);
+    } else {
+      // if it edit, map on the transaction and find the edit entry and replace with update data
+      setTransactionEntry(
+        [...transactionEntry].map((entry) => {
+          if (entry.id === transaction.id) {
+            return transaction;
+          }
+          return entry;
+        })
+      );
+    }
 
     // reseting form after submiting
     setTransaction({
@@ -30,7 +48,8 @@ export default function ExpanseBord() {
       amount: "",
       date: "",
     });
-    console.log(modifyedTransaction, "log from expense bord");
+    // going back to normel mode of the form...
+    setTypeOfFormAction({});
   };
   // calculating data for BalanceSummuery component
   const dataForTransactionSummary = transactionEntry.reduce(
@@ -67,6 +86,14 @@ export default function ExpanseBord() {
     });
   };
 
+  const handleEditOfEntry = (entry) => {
+    setTransaction({ ...entry });
+    // update type stae based on witch type of entry we are editing...
+    setType(entry.transactionType);
+    setTypeOfFormAction({ type: "Edit", entryToBeUpdated: entry });
+  };
+  // console.log(transaction);
+
   // calculate data for income expense  components
 
   const incomeTransactions = transactionEntry.filter(
@@ -85,16 +112,22 @@ export default function ExpanseBord() {
           setType={setType}
           transaction={transaction}
           setTransaction={setTransaction}
+          typeOfFormAction={typeOfFormAction}
         />
 
         <div className="lg:col-span-2">
           <BalanceSummery transactionData={dataForTransactionSummary} />
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-8">
-            <Income incomeTransactions={incomeTransactions} shortEntrys={shortEntrys}/>
+            <Income
+              incomeTransactions={incomeTransactions}
+              shortEntrys={shortEntrys}
+              handleEditOfEntry={handleEditOfEntry}
+            />
             <Expense
               expenseTransactions={expenseTransactions}
               shortEntrys={shortEntrys}
+              handleEditOfEntry={handleEditOfEntry}
             />
           </div>
         </div>

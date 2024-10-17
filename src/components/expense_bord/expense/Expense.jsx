@@ -1,10 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
 import ExpenseTitleIcon from "./ExpenseTitleIcon";
 import ExpanseShorting from "./ExpanseShorting";
 import ExpanseRow from "./ExpanseRow";
 import ExpanseFilter from "./ExpanseFilter";
 
-export default function Expense({ expenseTransactions, shortEntrys }) {
+export default function Expense({ expenseTransactions, shortEntrys ,handleEditOfEntry}) {
+  const [activeFilters, setActiveFilters] = useState({
+    Education: false,
+    Food: false,
+    Helth: false,
+    Bill: false,
+    Insurance: false,
+    Transport: false,
+    Telephone: false,
+  });
+
+  const handleFilterChange = (filterName, isChecked) => {
+    setActiveFilters((prevFilters) => ({
+      ...prevFilters,
+      [filterName]: isChecked,
+    }));
+  };
+
+  const filteredEntry = expenseTransactions.filter((entry) => {
+    const isFilterApplyed = Object.keys(activeFilters).some(
+      (key) => activeFilters[key] === true
+    );
+    if (isFilterApplyed) {
+      return Object.keys(activeFilters).some(
+        (category) => activeFilters[category] && entry.category === category
+      );
+    } else return expenseTransactions;
+  });
   return (
     <div className="border rounded-md relative">
       <div className="flex items-center justify-between gap-2 bg-[#F9FAFB] py-4 px-4 rounded-md">
@@ -23,12 +50,15 @@ export default function Expense({ expenseTransactions, shortEntrys }) {
         <div>
           <ExpanseShorting shortEntrys={shortEntrys} />
 
-          <ExpanseFilter />
+          <ExpanseFilter
+            activeFilters={activeFilters}
+            handleFilterChange={handleFilterChange}
+          />
         </div>
       </div>
       <div className="p-4 divide-y">
-        {expenseTransactions.map((entry) => (
-          <ExpanseRow key={entry.id} data={entry} />
+        {filteredEntry.map((entry) => (
+          <ExpanseRow key={entry.id} data={entry}  handleEditOfEntry={handleEditOfEntry}/>
         ))}
       </div>
     </div>
