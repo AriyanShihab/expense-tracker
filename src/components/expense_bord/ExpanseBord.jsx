@@ -5,11 +5,11 @@ import Expense from "./expense/Expense";
 import Income from "./income/Income";
 
 export default function ExpanseBord() {
-  const [type, setType] = useState("Expense");
-  const [transactionEntry, setTransactionEntry] = useState([]);
-  const [entryToBeUpdate, setEntryToBeUpdate] = useState(null);
-  const [typeOfFormAction, setTypeOfFormAction] = useState({});
-
+  const [type, setType] = useState("Expense"); // use for form tab function and tracsaction type
+  const [transactionEntry, setTransactionEntry] = useState([]); // store all the entry in single place, this will help us to wriete less condition on edit and delete function
+  const [entryToBeUpdate, setEntryToBeUpdate] = useState(null); // used for store wich entry to updated...
+  const [typeOfFormAction, setTypeOfFormAction] = useState({}); // tells from to open desired mode, then form tells ExpneseBord to perfoma oparetion dased on that mode
+ 
   const [transaction, setTransaction] = useState(
     entryToBeUpdate || {
       category: "",
@@ -92,7 +92,22 @@ export default function ExpanseBord() {
     setType(entry.transactionType);
     setTypeOfFormAction({ type: "Edit", entryToBeUpdated: entry });
   };
-  // console.log(transaction);
+  const handleDeletationOfEntry = (entry) => {
+    const permission = window.confirm(
+      `are you sure? this will delete the ${entry.transactionType} entry you have made on ${entry.date} `
+    );
+    if (permission) {
+      const shallow = transactionEntry.filter((previousEntrys) => {
+        return previousEntrys.id !== entry.id;
+      });
+      setTransactionEntry(shallow);
+      window.alert("Entry has been deleted successfully!");
+    } else {
+      window.alert(
+        "since you don't agree in confirm box, no delete action will be performed...!"
+      );
+    }
+  };
 
   // calculate data for income expense  components
 
@@ -123,11 +138,13 @@ export default function ExpanseBord() {
               incomeTransactions={incomeTransactions}
               shortEntrys={shortEntrys}
               handleEditOfEntry={handleEditOfEntry}
+              handleDeletationOfEntry={handleDeletationOfEntry}
             />
             <Expense
               expenseTransactions={expenseTransactions}
               shortEntrys={shortEntrys}
               handleEditOfEntry={handleEditOfEntry}
+              handleDeletationOfEntry={handleDeletationOfEntry}
             />
           </div>
         </div>

@@ -4,7 +4,12 @@ import IncomeRow from "./IncomeRow";
 import IncomeFilter from "./IncomeFilter";
 import IncomeShorting from "./IncomeShorting";
 
-export default function Income({ incomeTransactions, shortEntrys ,handleEditOfEntry}) {
+export default function Income({
+  incomeTransactions,
+  shortEntrys,
+  handleEditOfEntry,
+  handleDeletationOfEntry,
+}) {
   // catrgory of income for filterring income entry..
 
   const [activeFilters, setActiveFilters] = useState({
@@ -33,7 +38,6 @@ export default function Income({ incomeTransactions, shortEntrys ,handleEditOfEn
       );
     } else return incomeTransactions;
   });
-  
 
   return (
     <div className="border rounded-md relative">
@@ -60,7 +64,12 @@ export default function Income({ incomeTransactions, shortEntrys ,handleEditOfEn
       </div>
       <div className="p-4 divide-y">
         {filteredEntry.map((entry) => (
-          <IncomeRow key={entry.id} data={entry} handleEditOfEntry={handleEditOfEntry} />
+          <IncomeRow
+            key={entry.id}
+            data={entry}
+            handleEditOfEntry={handleEditOfEntry}
+            handleDeletationOfEntry={handleDeletationOfEntry}
+          />
         ))}
       </div>
     </div>

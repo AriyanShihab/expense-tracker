@@ -2,7 +2,11 @@ import React from "react";
 import DeleteIcon from "../../../global-icons/DeleteIcon";
 import EditIcon from "../../../global-icons/EditIcon";
 
-export default function ExpanseRow({ data, handleEditOfEntry }) {
+export default function ExpanseRow({
+  data,
+  handleEditOfEntry,
+  handleDeletationOfEntry,
+}) {
   const { category, amount, date } = data;
   return (
     <div className="flex justify-between items-center py-2 relative group cursor-pointer">
@@ -22,11 +26,16 @@ export default function ExpanseRow({ data, handleEditOfEntry }) {
             className="hover:text-teal-600"
             role="button"
             title="Edit Button"
-            onClick={()=> handleEditOfEntry(data)}
+            onClick={() => handleEditOfEntry(data)}
           >
             <EditIcon />
           </button>
-          <button className="hover:text-red-600" role="button" title="Delete">
+          <button
+            className="hover:text-red-600"
+            role="button"
+            title="Delete"
+            onClick={() => handleDeletationOfEntry(data)}
+          >
             <DeleteIcon />
           </button>
         </div>

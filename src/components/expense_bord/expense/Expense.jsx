@@ -4,7 +4,12 @@ import ExpanseShorting from "./ExpanseShorting";
 import ExpanseRow from "./ExpanseRow";
 import ExpanseFilter from "./ExpanseFilter";
 
-export default function Expense({ expenseTransactions, shortEntrys ,handleEditOfEntry}) {
+export default function Expense({
+  expenseTransactions,
+  shortEntrys,
+  handleEditOfEntry,
+  handleDeletationOfEntry,
+}) {
   const [activeFilters, setActiveFilters] = useState({
     Education: false,
     Food: false,
@@ -58,7 +63,12 @@ export default function Expense({ expenseTransactions, shortEntrys ,handleEditOf
       </div>
       <div className="p-4 divide-y">
         {filteredEntry.map((entry) => (
-          <ExpanseRow key={entry.id} data={entry}  handleEditOfEntry={handleEditOfEntry}/>
+          <ExpanseRow
+            key={entry.id}
+            data={entry}
+            handleEditOfEntry={handleEditOfEntry}
+            handleDeletationOfEntry={handleDeletationOfEntry}
+          />
         ))}
       </div>
     </div>

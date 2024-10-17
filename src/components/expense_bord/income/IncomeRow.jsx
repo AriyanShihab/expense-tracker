@@ -2,7 +2,11 @@ import React from "react";
 import EditIcon from "../../../global-icons/EditIcon";
 import DeleteIcon from "../../../global-icons/DeleteIcon";
 
-export default function IncomeRow({ data, handleEditOfEntry }) {
+export default function IncomeRow({
+  data,
+  handleEditOfEntry,
+  handleDeletationOfEntry,
+}) {
   const { category, amount, date } = data;
   return (
     <div className="flex justify-between items-center py-2 relative group cursor-pointer">
@@ -26,7 +30,12 @@ export default function IncomeRow({ data, handleEditOfEntry }) {
           >
             <EditIcon />
           </button>
-          <button className="hover:text-red-600" role="button" title="Delete">
+          <button
+            className="hover:text-red-600"
+            role="button"
+            title="Delete"
+            onClick={() => handleDeletationOfEntry(data)}
+          >
             <DeleteIcon />
           </button>
         </div>
