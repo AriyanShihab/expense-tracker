@@ -16,22 +16,29 @@ export default function Form({
       [name]: value,
     });
   };
+  function handleTypeChange(typeToSet) {
+    // plan is if the form is in edit mode, we don't allow to change type in form...
+    if (!typeOfFormAction.type) {
+      setType(typeToSet);
+    } else {
+      window.alert(
+        "currently you are one the edit mode, and you can't change type(income/Expense) now..! "
+      );
+    }
+  }
   return (
     <div className="p-6 py-8 bg-[#F9FAFB] border rounded-md relative">
       <h2 className="text-3xl font-semibold leading-7 text-gray-800 text-center">
         Expense Tracker
       </h2>
-      {/* {typeOfFormAction.type === "Edit" ? (
-        <span className="text-sm text-red-300 bg-red-100/70 px-4 py-2 rounded-sm absolute top-0 right-0">
-          * Edit Mode
-        </span>
-      ) : null} */}
 
-      <form onSubmit={() => onSubmission(event, transaction, typeOfFormAction.type)}>
+      <form
+        onSubmit={() => onSubmission(event, transaction, typeOfFormAction.type)}
+      >
         <div className="flex divide-x divide-slate-400/20 overflow-hidden rounded-md bg-white text-[0.8125rem] font-medium leading-5 text-slate-700 shadow-sm ring-1 ring-slate-700/10 mt-6">
           <div
             onClick={() => {
-              setType("Expense");
+              handleTypeChange("Expense");
             }}
             className={`cursor-pointer text-center flex-1 px-4 py-2 hover:bg-slate-50 hover:text-slate-900 ${
               type === "Expense" ? "active" : ""
@@ -41,7 +48,7 @@ export default function Form({
           </div>
           <div
             onClick={() => {
-              setType("Income");
+              handleTypeChange("Income");
             }}
             className={`cursor-pointer text-center flex-1 px-4 py-2 hover:bg-slate-50 hover:text-slate-900 ${
               type === "Income" ? "active" : ""
@@ -138,7 +145,9 @@ export default function Form({
           type="submit"
           className="mt-6 rounded-md bg-teal-600 px-8 py-2 text-sm font-semibold text-white shadow-sm hover:bg-teal-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-600 w-full capitalize"
         >
-          {typeOfFormAction.type === "Edit" ? `Update ${type} Entry` : `add new ${type}`}
+          {typeOfFormAction.type === "Edit"
+            ? `Update ${type} Entry`
+            : `add new ${type}`}
         </button>
       </form>
     </div>
